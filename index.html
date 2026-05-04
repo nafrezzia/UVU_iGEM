@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>BioBuilder Academy</title>
+ <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+ 
+<div id="app">
+ 
+ <!-- World selector screen -->
+ <div id="screen-world" class="screen active">
+   <div class="hero">
+     <div class="hero-badge">grades K–5</div>
+     <h1>BioBuilder Academy</h1>
+     <p class="hero-sub">Engineer living things to save the planet — one gene at a time.</p>
+   </div>
+ 
+   <div class="world-grid" id="world-grid"></div>
+ 
+   <div class="progress-bar-row">
+     <span class="label-sm">overall progress</span>
+     <div class="prog-track"><div class="prog-fill" id="overall-prog"></div></div>
+     <span class="label-sm" id="overall-label">0 / 12</span>
+   </div>
+ </div>
+ 
+ <!-- Level selector screen -->
+ <div id="screen-levels" class="screen">
+   <button class="back-btn" onclick="showScreen('world')">← worlds</button>
+   <h2 id="level-world-title"></h2>
+   <div class="level-list" id="level-list"></div>
+ </div>
+ 
+ <!-- Game screen (levels render here) -->
+ <div id="screen-game" class="screen">
+   <button class="back-btn" onclick="showScreen('levels')">← levels</button>
+   <div id="game-container"></div>
+ </div>
+ 
+</div>
+ 
+<script type="module">
+ import { worlds, levels } from './src/data/outcomes.js';
+ import { getProgress, markComplete } from './src/data/progress.js';
+ import { runLevel } from './src/engine.js';
+ 
+ window.showScreen = function(name) {
+   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+   document.getElementById('screen-' + name).classList.add('active');
+ };
+ 
+ function renderWorldGrid() {
+   const prog = getProgress();
+   const grid = document.getElementById('world-grid');
+   grid.innerHTML = '';
+   Object.entries(worlds).forEach(([key, w]) => {
+     const worldLevels = levels.filter(l => l.world === key);
+     const done = worldLevels.filter(l => prog[l.id]).length;
+     const card = document.createElement('div');
+     card.className = 'world-card';
+     card.style.setProperty('--world-color', w.color);
+     card.style.setProperty('--world-bg', w.bg);
+     card.innerHTML = `
+       <div class="world-icon">${w.icon}</div>
+       <div class="world-name">${w.label}</div>
+       <div class="world-grade">${w.grade}</div>
+       <div class="world-prog">${done}/${worldLevels.length} levels</div>
+       <div class="prog-track sm">
+         <div class="prog-fill" style="width:${Math.round((done/worldLevels.length)*100)}%"></div>
+       </div>
+     `;
+     card.addEventListener('click', () => showLevelList(key));
+     grid.appendChild(card);
+   });
+ 
+   const allDone = levels.filter(l => prog[l.id]).length;
+   document.getElementById('overall-prog').style.width = Math.round((allDone / levels.length) * 100) + '%';
+   document.getElementById('overall-label').textContent = allDone + ' / ' + levels.length;
+ }
+ 
+ function showLevelList(worldKey) {
+   const w = worlds[worldKey];
+   const prog = getProgress();
+   document.getElementById('level-world-title').textContent = w.label;
+   document.getElementById('level-world-title').style.color = w.color;
+   const list = document.getElementById('level-list');
+   list.innerHTML = '';
+   levels.filter(l => l.world === worldKey).forEach((lev, idx, arr) => {
+     const prevDone = idx === 0 || prog[arr[idx - 1].id];
+     const isDone = !!prog[lev.id];
+     const isLocked = idx > 0 && !prevDone;
+     const item = document.createElement('div');
+     item.className = 'level-item' + (isDone ? ' done' : '') + (isLocked ? ' locked' : '');
+     item.innerHTML = `
+       <div class="level-num">L${lev.id}</div>
+       <div class="level-info">
+         <div class="level-title">${lev.title}</div>
+         <div class="level-tagline">${lev.tagline}</div>
+         <div class="level-tags">${lev.concepts.map(c => `<span class="tag">${c}</span>`).join('')}</div>
+       </div>
+       <div class="level-status">
+         ${isDone ? '<span class="status-done">✓</span>' : isLocked ? '<span class="status-lock">🔒</span>' : '<span class="status-play">▶</span>'}
+         <div class="grade-pill" style="background:${w.bg};color:${w.color};">${lev.grade}</div>
+       </div>
+     `;
+     if (!isLocked) {
+       item.addEventListener('click', () => loadLevel(lev.id));
+     }
+     list.appendChild(item);
+   });
+   showScreen('levels');
+ }
+ 
+ async function loadLevel(id) {
+   showScreen('game');
+   const container = document.getElementById('game-container');
+   container.innerHTML = '<div class="loading">Loading level…</div>';
+   try {
+     await runLevel(id, container, (completedId) => {
+       markComplete(completedId);
+       renderWorldGrid();
+     });
+   } catch(e) {
+     container.innerHTML = `<div class="error">Could not load level ${id}. <button onclick="showScreen('levels')">Go back</button></div>`;
+     console.error(e);
+   }
+ }
+ 
+ window.loadLevel = loadLevel;
+ renderWorldGrid();
+</script>
+ 
+</body>
+</html>
+
