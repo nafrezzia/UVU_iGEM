@@ -122,6 +122,13 @@
      await runLevel(id, container, (completedId) => {
        markComplete(completedId);
        renderWorldGrid();
+
+       const nextLevel = levels.find(level => level.id === completedId + 1);
+       if (nextLevel) {
+         loadLevel(nextLevel.id);
+       } else {
+         showScreen('levels');
+       }
      });
    } catch(e) {
      container.innerHTML = `<div class="error">Could not load level ${id}. <button onclick="showScreen('levels')">Go back</button></div>`;
