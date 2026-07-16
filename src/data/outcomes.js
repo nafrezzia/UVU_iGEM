@@ -59,7 +59,10 @@ export const worlds = {
 // ── Level manifest ────────────────────────────────────────────────────────────
 // Lightweight metadata only — full configs live in src/levels/levelN.js
 
+// Ordered by play sequence: all of Ocean Lab, then FarmBot Fields, then Body
+// Defenders, then BioCity. `id` matches this order so "next level" is just id + 1.
 export const levels = [
+  // ── Ocean Lab ──
   {
     id: 1, world: 'ocean', grade: 'K–1',
     title: 'Plastic cleanup',
@@ -75,67 +78,70 @@ export const levels = [
     ngss: ['LS1.B', 'ETS1.B'],
   },
   {
-    id: 3, world: 'farm', grade: '2–3',
+    id: 3, world: 'ocean', grade: '4–5',
+    title: 'Deep sea cleanup',
+    tagline: 'Redesign the microbe for cold, high-pressure depths',
+    concepts: ['protein folding', 'environmental adaptation', 'multi-gene'],
+    ngss: ['LS4.C', 'LS1.A'],
+  },
+  // ── FarmBot Fields ──
+  {
+    id: 4, world: 'farm', grade: '2–3',
     title: 'The drought',
     tagline: 'Give wheat cactus genes to survive dry summers',
     concepts: ['cross-species transfer', 'GMO basics', 'pollination'],
     ngss: ['LS3.B', 'LS4.B'],
   },
   {
-    id: 4, world: 'farm', grade: '2–3',
+    id: 5, world: 'farm', grade: '2–3',
     title: 'Pollen patrol',
     tagline: 'Keep modified genes on the farm',
     concepts: ['horizontal gene transfer', 'ecosystem risk', 'containment'],
     ngss: ['LS4.D', 'ETS1.C'],
   },
   {
-    id: 5, world: 'body', grade: '3–4',
+    id: 6, world: 'farm', grade: '5',
+    title: 'Nitrogen factory',
+    tagline: 'Engineer a root bacterium to feed crops naturally',
+    concepts: ['symbiosis', 'nitrogen fixation', 'gene circuits'],
+    ngss: ['LS2.A', 'LS3.B'],
+  },
+  // ── Body Defenders ──
+  {
+    id: 7, world: 'body', grade: '3–4',
     title: 'The virus',
     tagline: 'Program immune cells to recognize a new pathogen',
     concepts: ['cell signaling', 'receptor design', 'immune response'],
     ngss: ['LS1.A', 'LS1.C'],
   },
   {
-    id: 6, world: 'body', grade: '3–4',
+    id: 8, world: 'body', grade: '3–4',
     title: 'Overzealous defender',
     tagline: 'Stop immune cells attacking healthy tissue',
     concepts: ['autoimmunity', 'target specificity', 'feedback loops'],
     ngss: ['LS1.A', 'ETS1.B'],
   },
   {
-    id: 7, world: 'city', grade: '4',
+    id: 9, world: 'body', grade: '4–5',
+    title: 'Tiny surgeons',
+    tagline: 'Guide a cell to deliver medicine to one exact spot',
+    concepts: ['drug delivery', 'address proteins', 'precision medicine'],
+    ngss: ['LS1.C', 'ETS1.B'],
+  },
+  // ── BioCity ──
+  {
+    id: 10, world: 'city', grade: '4',
     title: 'Glowing trees',
     tagline: 'Light city streets with firefly bioluminescence',
     concepts: ['bioluminescence', 'gene expression', 'cross-species transfer'],
     ngss: ['LS1.A', 'LS3.A'],
   },
   {
-    id: 8, world: 'city', grade: '4',
+    id: 11, world: 'city', grade: '4',
     title: 'Brighter city',
     tagline: 'Chain two genes together as a logic gate',
     concepts: ['gene circuits', 'logic gates', 'multi-gene design'],
     ngss: ['LS1.A', 'ETS1.B'],
-  },
-  {
-    id: 9, world: 'ocean', grade: '4–5',
-    title: 'Deep sea cleanup',
-    tagline: 'Redesign the microbe for cold, high-pressure depths',
-    concepts: ['protein folding', 'environmental adaptation', 'multi-gene'],
-    ngss: ['LS4.C', 'LS1.A'],
-  },
-  {
-    id: 10, world: 'body', grade: '4–5',
-    title: 'Tiny surgeons',
-    tagline: 'Guide a cell to deliver medicine to one exact spot',
-    concepts: ['drug delivery', 'address proteins', 'precision medicine'],
-    ngss: ['LS1.C', 'ETS1.B'],
-  },
-  {
-    id: 11, world: 'farm', grade: '5',
-    title: 'Nitrogen factory',
-    tagline: 'Engineer a root bacterium to feed crops naturally',
-    concepts: ['symbiosis', 'nitrogen fixation', 'gene circuits'],
-    ngss: ['LS2.A', 'LS3.B'],
   },
   {
     id: 12, world: 'city', grade: '5',

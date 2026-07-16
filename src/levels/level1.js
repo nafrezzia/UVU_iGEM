@@ -57,7 +57,7 @@ export default {
       return `<g transform="translate(${ox},${oy})" opacity="${i > 0 ? 0.5 : 1}">
         <ellipse cx="50" cy="50" rx="28" ry="22" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="1.5"/>
         <circle cx="42" cy="46" r="4" fill="#9FE1CB"/>
-        <circle cx="54" cy="52" r="3" fill="#9FE1CB"/>
+        <circle cx="54" cy="46" r="4" fill="#9FE1CB"/>
         <path d="${mouth}" stroke="#085041" stroke-width="1.5" fill="none" stroke-linecap="round"/>
       </g>`;
     }).join('');

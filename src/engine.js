@@ -4,6 +4,18 @@
 // builds the UI from shared components, and wires up the simulation loop.
 
 import { GENES } from './data/outcomes.js';
+import level1 from './levels/level1.js';
+import level2 from './levels/level2.js';
+import theDrought from './levels/level3.js';
+import bundled from './levels/levels4-12.js';
+
+// Registry of every level config, keyed by its own `id`. The `id` inside each
+// config is the single source of truth for ordering — filenames and export
+// names are historical and do not need to match.
+const LEVELS = {};
+[level1, level2, theDrought, ...Object.values(bundled)].forEach(cfg => {
+  if (cfg && typeof cfg.id === 'number') LEVELS[cfg.id] = cfg;
+});
 
 /**
  * Load and run a level inside `container`.
@@ -14,17 +26,8 @@ import { GENES } from './data/outcomes.js';
  * @param {(id: number) => void} onComplete
  */
 export async function runLevel(id, container, onComplete) {
-  // Dynamically import the level config
-  let config;
-  if (id >= 4) {
-    // Levels 4-12 are exported as named exports from levels4-12.js
-    const mod = await import(`./levels/levels4-12.js`);
-    config = mod[`level${id}`];
-  } else {
-    // Levels 1-3 are default exports from individual files
-    const mod = await import(`./levels/level${id}.js`);
-    config = mod.default;
-  }
+  const config = LEVELS[id];
+  if (!config) throw new Error(`No level config found for id ${id}`);
 
   container.innerHTML = '';
 
@@ -255,7 +258,7 @@ export async function runLevel(id, container, onComplete) {
       const wrap = document.getElementById('organism-art-wrap');
       if (wrap) wrap.innerHTML = config.buildOrganism([]);
     }
-    setZoe(config.zoeIntro);
+    setJon(config.zoeIntro);
   }
 
   // Init organism art

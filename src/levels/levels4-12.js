@@ -1,4 +1,7 @@
-// ── Levels 4–12: Stub configs ─────────────────────────────────────────────────
+// ── Bundled level configs ─────────────────────────────────────────────────────
+//
+// Every export below is keyed to the play-order `id` inside its config (not the
+// export name or this file's name). The engine looks levels up by `id`.
 //
 // These are design-complete stubs ready for full implementation.
 // Each exports a valid level config that loads and runs in the engine,
@@ -7,9 +10,9 @@
 //
 // See docs/CONTRIBUTING.md for the full authoring guide.
 
-// ── Level 4: Pollen Patrol ────────────────────────────────────────────────────
-export const level4 = {
-  id: 4, world: 'farm', title: 'Pollen patrol',
+// ── Level 5: Pollen Patrol ────────────────────────────────────────────────────
+export const level5 = {
+  id: 5, world: 'farm', title: 'Pollen patrol',
   organismLabel: 'Your drought-resistant wheat',
   slots: 2, growLabel: 'Release pollen!',
   genes: ['pollblock', 'smooth', 'fragrance', 'stop', 'timer'],
@@ -64,9 +67,9 @@ export const level4 = {
 };
 
 
-// ── Level 5: The Virus ────────────────────────────────────────────────────────
-export const level5 = {
-  id: 5, world: 'body', title: 'The virus',
+// ── Level 7: The Virus ────────────────────────────────────────────────────────
+export const level7 = {
+  id: 7, world: 'body', title: 'The virus',
   organismLabel: 'Your immune cell',
   slots: 3, growLabel: 'Deploy!',
   genes: ['recognize', 'attack', 'selftag', 'memory', 'brakes'],
@@ -135,9 +138,9 @@ export const level5 = {
 };
 
 
-// ── Level 6: Overzealous Defender ─────────────────────────────────────────────
-export const level6 = {
-  id: 6, world: 'body', title: 'Overzealous defender',
+// ── Level 8: Overzealous Defender ─────────────────────────────────────────────
+export const level8 = {
+  id: 8, world: 'body', title: 'Overzealous defender',
   organismLabel: 'Your upgraded immune cell',
   slots: 2, growLabel: 'Deploy!',
   genes: ['selftag', 'brakes', 'memory', 'stop', 'signal'],
@@ -188,9 +191,9 @@ export const level6 = {
 };
 
 
-// ── Level 7: Glowing Trees ────────────────────────────────────────────────────
-export const level7 = {
-  id: 7, world: 'city', title: 'Glowing trees',
+// ── Level 10: Glowing Trees ───────────────────────────────────────────────────
+export const level10 = {
+  id: 10, world: 'city', title: 'Glowing trees',
   organismLabel: 'Your city tree',
   slots: 3, growLabel: 'Plant it!',
   genes: ['lucifer', 'darksense', 'release', 'deep', 'stop'],
@@ -239,9 +242,9 @@ export const level7 = {
 };
 
 
-// ── Level 8: Brighter City ────────────────────────────────────────────────────
-export const level8 = {
-  id: 8, world: 'city', title: 'Brighter city',
+// ── Level 11: Brighter City ───────────────────────────────────────────────────
+export const level11 = {
+  id: 11, world: 'city', title: 'Brighter city',
   organismLabel: 'Your logic-gated tree',
   slots: 2, growLabel: 'Wire it up!',
   genes: ['darksense', 'healthsense', 'andgate', 'stop', 'release'],
@@ -293,16 +296,16 @@ export const level8 = {
 };
 
 
-// ── Levels 9–12 are similarly structured; implementation follows the same
-// pattern as levels 1–8. See docs/CONTRIBUTING.md for authoring guidance.
+// ── The remaining levels are similarly structured; implementation follows the
+// same pattern as the levels above. See docs/CONTRIBUTING.md for authoring guidance.
 
-export const level9  = { id: 9,  world: 'ocean', title: 'Deep sea cleanup',     slots: 4, genes: ['detect','eat','stop','coldtol','armor','timer','counter'], lockedGenes: [], zoeIntro: 'The ocean floor is cold and high-pressure — your Level 1 microbe dies down there. Add 4 genes to redesign it for the deep sea!', zoeWin: 'Multi-gene engineering complete! Real deep-sea organisms use these exact adaptations.', zoeFail: 'The microbe couldn\'t survive the pressure and cold. Try cold tolerance and armor together.', zoeWarn: 'Surviving but not thriving. You need cold tolerance AND pressure protection AND a way to keep working.', stats: ['yield','health','side'], outcomes: { 'coldtol,detect,eat,stop': { verdict:'win', msg:'Cold tolerance + detection + breakdown + stop signal. All four working together!', stats:{ yield:{label:'plastic cleaned',display:'80%',pct:80,color:'#1D9E75'}, health:{label:'microbe survival',display:'85%',pct:85,color:'#378ADD'}, side:{label:'side effects',display:'none',pct:5,color:'#E24B4A'} } } }, defaultOutcome:()=>({ verdict:'warn', msg:'The deep sea requires cold tolerance AND pressure protection. Try cold tolerance, detect, eat, and stop.', stats:{ yield:{label:'plastic cleaned',display:'40%',pct:40,color:'#1D9E75'}, health:{label:'microbe survival',display:'35%',pct:35,color:'#378ADD'}, side:{label:'side effects',display:'mild',pct:25,color:'#E24B4A'} } }), grid:{label:'Deep ocean cleanup zone',cols:12,rows:4,cellHeight:18,defaultColor:'#0C447C',legend:[{color:'#0C447C',label:'deep water'},{color:'#1D9E75',label:'cleaned'},{color:'#B4B2A9',label:'microbe died'}]}, animateGrid(r){for(let i=0;i<48;i++){const c=document.getElementById('gc-'+i);if(!c)return;setTimeout(()=>{c.style.background=r.verdict==='win'?'#1D9E75':'#B4B2A9';},i*10);}}, buildOrganism:(g)=>`<svg width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="32" ry="26" fill="${g.includes('coldtol')?'#E6F1FB':'#E1F5EE'}" stroke="#5DCAA5" stroke-width="1.5"/><text x="50" y="53" text-anchor="middle" font-size="10" fill="#085041" font-weight="500">${g.length}/4 genes</text></svg>` };
+export const level3  = { id: 3,  world: 'ocean', title: 'Deep sea cleanup',     slots: 4, genes: ['detect','eat','stop','coldtol','armor','timer','counter'], lockedGenes: [], zoeIntro: 'The ocean floor is cold and high-pressure — your Level 1 microbe dies down there. Add 4 genes to redesign it for the deep sea!', zoeWin: 'Multi-gene engineering complete! Real deep-sea organisms use these exact adaptations.', zoeFail: 'The microbe couldn\'t survive the pressure and cold. Try cold tolerance and armor together.', zoeWarn: 'Surviving but not thriving. You need cold tolerance AND pressure protection AND a way to keep working.', stats: ['yield','health','side'], outcomes: { 'coldtol,detect,eat,stop': { verdict:'win', msg:'Cold tolerance + detection + breakdown + stop signal. All four working together!', stats:{ yield:{label:'plastic cleaned',display:'80%',pct:80,color:'#1D9E75'}, health:{label:'microbe survival',display:'85%',pct:85,color:'#378ADD'}, side:{label:'side effects',display:'none',pct:5,color:'#E24B4A'} } } }, defaultOutcome:()=>({ verdict:'warn', msg:'The deep sea requires cold tolerance AND pressure protection. Try cold tolerance, detect, eat, and stop.', stats:{ yield:{label:'plastic cleaned',display:'40%',pct:40,color:'#1D9E75'}, health:{label:'microbe survival',display:'35%',pct:35,color:'#378ADD'}, side:{label:'side effects',display:'mild',pct:25,color:'#E24B4A'} } }), grid:{label:'Deep ocean cleanup zone',cols:12,rows:4,cellHeight:18,defaultColor:'#0C447C',legend:[{color:'#0C447C',label:'deep water'},{color:'#1D9E75',label:'cleaned'},{color:'#B4B2A9',label:'microbe died'}]}, animateGrid(r){for(let i=0;i<48;i++){const c=document.getElementById('gc-'+i);if(!c)return;setTimeout(()=>{c.style.background=r.verdict==='win'?'#1D9E75':'#B4B2A9';},i*10);}}, buildOrganism:(g)=>`<svg width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="32" ry="26" fill="${g.includes('coldtol')?'#E6F1FB':'#E1F5EE'}" stroke="#5DCAA5" stroke-width="1.5"/><text x="50" y="53" text-anchor="middle" font-size="10" fill="#085041" font-weight="500">${g.length}/4 genes</text></svg>` };
 
-export const level10 = { id: 10, world: 'body',  title: 'Tiny surgeons',         slots: 3, genes: ['address','payload','dissolve','selftag','brakes'], lockedGenes: ['recognize'], zoeIntro: 'A patient has a tumor. Design a cell that finds it, delivers medicine, then disappears safely!', zoeWin: 'You just designed a drug delivery system like real nanoparticle medicine!', zoeFail: 'The medicine was delivered to the wrong place! The address gene is essential.', zoeWarn: 'Almost! Make sure the cell can find the tumor, deliver the medicine, then dissolve.', stats: ['accuracy','delivery','side'], outcomes: { 'address,dissolve,payload': { verdict:'win', msg:'Address finds the tumor, payload delivers medicine, dissolve removes the cell safely. Precision medicine!', stats:{ accuracy:{label:'targeting accuracy',display:'96%',pct:96,color:'#993C1D'}, delivery:{label:'medicine delivered',display:'91%',pct:91,color:'#1D9E75'}, side:{label:'side effects',display:'none',pct:3,color:'#E24B4A'} } } }, defaultOutcome:()=>({ verdict:'warn', msg:'The cell needs three things: an address to find the tumor, a payload to deliver medicine, and a dissolve gene to clean up after.', stats:{ accuracy:{label:'targeting accuracy',display:'50%',pct:50,color:'#993C1D'}, delivery:{label:'medicine delivered',display:'45%',pct:45,color:'#1D9E75'}, side:{label:'side effects',display:'mild',pct:35,color:'#E24B4A'} } }), grid:{label:'Body scan — tumor targeting',cols:12,rows:4,cellHeight:18,defaultColor:'#FAECE7',legend:[{color:'#FAECE7',label:'body tissue'},{color:'#1D9E75',label:'tumor treated'},{color:'#E24B4A',label:'wrong tissue hit'}]}, animateGrid(r){for(let i=0;i<48;i++){const c=document.getElementById('gc-'+i);if(!c)return;setTimeout(()=>{c.style.background=r.verdict==='win'?'#E1F5EE':'#E24B4A';},i*12);}}, buildOrganism:(g)=>`<svg width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="36" ry="30" fill="#FAECE7" stroke="#F5C4B3" stroke-width="1.5"/><text x="50" y="53" text-anchor="middle" font-size="10" fill="#712B13" font-weight="500">${g.length}/3 genes</text></svg>` };
+export const level9  = { id: 9,  world: 'body',  title: 'Tiny surgeons',         slots: 3, genes: ['address','payload','dissolve','selftag','brakes'], lockedGenes: ['recognize'], zoeIntro: 'A patient has a tumor. Design a cell that finds it, delivers medicine, then disappears safely!', zoeWin: 'You just designed a drug delivery system like real nanoparticle medicine!', zoeFail: 'The medicine was delivered to the wrong place! The address gene is essential.', zoeWarn: 'Almost! Make sure the cell can find the tumor, deliver the medicine, then dissolve.', stats: ['accuracy','delivery','side'], outcomes: { 'address,dissolve,payload': { verdict:'win', msg:'Address finds the tumor, payload delivers medicine, dissolve removes the cell safely. Precision medicine!', stats:{ accuracy:{label:'targeting accuracy',display:'96%',pct:96,color:'#993C1D'}, delivery:{label:'medicine delivered',display:'91%',pct:91,color:'#1D9E75'}, side:{label:'side effects',display:'none',pct:3,color:'#E24B4A'} } } }, defaultOutcome:()=>({ verdict:'warn', msg:'The cell needs three things: an address to find the tumor, a payload to deliver medicine, and a dissolve gene to clean up after.', stats:{ accuracy:{label:'targeting accuracy',display:'50%',pct:50,color:'#993C1D'}, delivery:{label:'medicine delivered',display:'45%',pct:45,color:'#1D9E75'}, side:{label:'side effects',display:'mild',pct:35,color:'#E24B4A'} } }), grid:{label:'Body scan — tumor targeting',cols:12,rows:4,cellHeight:18,defaultColor:'#FAECE7',legend:[{color:'#FAECE7',label:'body tissue'},{color:'#1D9E75',label:'tumor treated'},{color:'#E24B4A',label:'wrong tissue hit'}]}, animateGrid(r){for(let i=0;i<48;i++){const c=document.getElementById('gc-'+i);if(!c)return;setTimeout(()=>{c.style.background=r.verdict==='win'?'#E1F5EE':'#E24B4A';},i*12);}}, buildOrganism:(g)=>`<svg width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="36" ry="30" fill="#FAECE7" stroke="#F5C4B3" stroke-width="1.5"/><text x="50" y="53" text-anchor="middle" font-size="10" fill="#712B13" font-weight="500">${g.length}/3 genes</text></svg>` };
 
-export const level11 = { id: 11, world: 'farm',  title: 'Nitrogen factory',      slots: 3, genes: ['signal','stop','andgate','timer','deep'], lockedGenes: ['store','smooth'], zoeIntro: 'Crops need fertilizer but it pollutes rivers. Can you engineer a soil bacterium to make nitrogen naturally — only when it\'s near crop roots?', zoeWin: 'Real symbiotic bacteria called rhizobia do exactly this! You just re-created one of nature\'s cleverest partnerships.', zoeFail: 'The bacterium made nitrogen in the wrong places, polluting the river. It needs to sense the crop roots first.', zoeWarn: 'Getting close! The bacterium needs to detect the roots AND only make nitrogen near them.', stats: ['yield','pollution','efficiency'], outcomes: { 'andgate,signal,stop': { verdict:'win', msg:'The signal gene detects root chemicals, the AND gate ensures both conditions are met, and stop prevents over-production. Symbiosis achieved!', stats:{ yield:{label:'crop yield',display:'88%',pct:88,color:'#639922'}, pollution:{label:'river pollution',display:'3%',pct:3,color:'#E24B4A'}, efficiency:{label:'efficiency',display:'94%',pct:94,color:'#1D9E75'} } } }, defaultOutcome:()=>({ verdict:'warn', msg:'The bacterium is producing nitrogen but not targeting it well. Use a signal gene to detect roots and an AND gate to ensure it only acts near crops.', stats:{ yield:{label:'crop yield',display:'60%',pct:60,color:'#639922'}, pollution:{label:'river pollution',display:'45%',pct:45,color:'#E24B4A'}, efficiency:{label:'efficiency',display:'55%',pct:55,color:'#1D9E75'} } }), grid:{label:'Farm soil — nitrogen distribution',cols:14,rows:4,cellHeight:18,defaultColor:'#D3D1C7',legend:[{color:'#EAF3DE',label:'healthy soil'},{color:'#D3D1C7',label:'dry soil'},{color:'#378ADD',label:'river (watch pollution)'}]}, animateGrid(r){for(let i=0;i<56;i++){const c=document.getElementById('gc-'+i);if(!c)return;setTimeout(()=>{c.style.background=r.verdict==='win'?'#EAF3DE':'#D3D1C7';},i*10);}}, buildOrganism:(g)=>`<svg width="100" height="90" viewBox="0 0 100 90"><ellipse cx="50" cy="45" rx="28" ry="20" fill="#EAF3DE" stroke="#C0DD97" stroke-width="1.5"/><text x="50" y="48" text-anchor="middle" font-size="10" fill="#27500A" font-weight="500">${g.length}/3 genes</text></svg>` };
+export const level6  = { id: 6,  world: 'farm',  title: 'Nitrogen factory',      slots: 3, genes: ['signal','stop','andgate','timer','deep'], lockedGenes: ['store','smooth'], zoeIntro: 'Crops need fertilizer but it pollutes rivers. Can you engineer a soil bacterium to make nitrogen naturally — only when it\'s near crop roots?', zoeWin: 'Real symbiotic bacteria called rhizobia do exactly this! You just re-created one of nature\'s cleverest partnerships.', zoeFail: 'The bacterium made nitrogen in the wrong places, polluting the river. It needs to sense the crop roots first.', zoeWarn: 'Getting close! The bacterium needs to detect the roots AND only make nitrogen near them.', stats: ['yield','pollution','efficiency'], outcomes: { 'andgate,signal,stop': { verdict:'win', msg:'The signal gene detects root chemicals, the AND gate ensures both conditions are met, and stop prevents over-production. Symbiosis achieved!', stats:{ yield:{label:'crop yield',display:'88%',pct:88,color:'#639922'}, pollution:{label:'river pollution',display:'3%',pct:3,color:'#E24B4A'}, efficiency:{label:'efficiency',display:'94%',pct:94,color:'#1D9E75'} } } }, defaultOutcome:()=>({ verdict:'warn', msg:'The bacterium is producing nitrogen but not targeting it well. Use a signal gene to detect roots and an AND gate to ensure it only acts near crops.', stats:{ yield:{label:'crop yield',display:'60%',pct:60,color:'#639922'}, pollution:{label:'river pollution',display:'45%',pct:45,color:'#E24B4A'}, efficiency:{label:'efficiency',display:'55%',pct:55,color:'#1D9E75'} } }), grid:{label:'Farm soil — nitrogen distribution',cols:14,rows:4,cellHeight:18,defaultColor:'#D3D1C7',legend:[{color:'#EAF3DE',label:'healthy soil'},{color:'#D3D1C7',label:'dry soil'},{color:'#378ADD',label:'river (watch pollution)'}]}, animateGrid(r){for(let i=0;i<56;i++){const c=document.getElementById('gc-'+i);if(!c)return;setTimeout(()=>{c.style.background=r.verdict==='win'?'#EAF3DE':'#D3D1C7';},i*10);}}, buildOrganism:(g)=>`<svg width="100" height="90" viewBox="0 0 100 90"><ellipse cx="50" cy="45" rx="28" ry="20" fill="#EAF3DE" stroke="#C0DD97" stroke-width="1.5"/><text x="50" y="48" text-anchor="middle" font-size="10" fill="#27500A" font-weight="500">${g.length}/3 genes</text></svg>` };
 
 export const level12 = { id: 12, world: 'city',  title: 'Final mission — design your own', slots: 4, genes: ['detect','eat','stop','lucifer','recognize','address','payload','dissolve','andgate','timer','counter','signal'], lockedGenes: [], zoeIntro: 'You\'ve learned so much! Now it\'s your turn to choose a problem and design your own solution. Pick any 4 genes — your peer ethics committee will review your design!', zoeWin: 'Congratulations, scientist! You completed BioBuilder Academy. Your design has been sent to the ethics committee for review!', zoeFail: 'The design had unintended consequences. Think about what stop conditions and containment you need.', zoeWarn: 'Interesting design! The ethics committee has some questions. Think about what could go wrong.', stats: ['impact','safety','ethics'], outcomes: {}, defaultOutcome:(genes)=>({ verdict: genes.includes('stop') || genes.includes('timer') || genes.includes('counter') ? 'win' : 'warn', msg: genes.includes('stop') || genes.includes('timer') || genes.includes('counter') ? 'Your design includes a safety mechanism — the ethics committee approves! Well done, you graduated BioBuilder Academy.' : 'Your design is creative, but the ethics committee notes it has no off-switch or containment. Real scientists always include safety systems. Can you add one?', stats:{ impact: {label:'real-world impact',display: genes.length >= 3 ? 'high' : 'medium', pct: genes.length * 20, color:'#1D9E75'}, safety: {label:'safety rating',    display: genes.includes('stop') ? 'safe' : 'risky', pct: genes.includes('stop') ? 90 : 30, color:'#378ADD'}, ethics: {label:'ethics score',    display: genes.includes('stop') ? 'pass' : 'review', pct: genes.includes('stop') ? 85 : 40, color:'#BA7517'} } }), grid:{label:'World map — problem zones',cols:14,rows:4,cellHeight:18,defaultColor:'#B5D4F4',legend:[{color:'#1D9E75',label:'problem solved'},{color:'#B5D4F4',label:'still affected'},{color:'#EF9F27',label:'needs review'}]}, animateGrid(r){for(let i=0;i<56;i++){const c=document.getElementById('gc-'+i);if(!c)return;setTimeout(()=>{c.style.background=r.verdict==='win'?'#1D9E75':'#EF9F27';},i*12);}}, buildOrganism:(g)=>`<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="#EEEDFE" stroke="#CECBF6" stroke-width="1.5"/><text x="50" y="46" text-anchor="middle" font-size="10" fill="#3C3489" font-weight="500">my organism</text><text x="50" y="62" text-anchor="middle" font-size="10" fill="#534AB7">${g.length}/4 genes</text></svg>` };
 
 // Re-export all as named exports for dynamic import routing in engine.js
-export default { level4, level5, level6, level7, level8, level9, level10, level11, level12 };
+export default { level3, level5, level6, level7, level8, level9, level10, level11, level12 };

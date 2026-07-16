@@ -57,7 +57,7 @@ export default {
     return `<svg width="100" height="100" viewBox="0 0 100 100">
       <ellipse cx="50" cy="50" rx="32" ry="26" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>
       <circle cx="42" cy="46" r="4" fill="${hasArmor ? '#B4B2A9' : '#9FE1CB'}"/>
-      <circle cx="55" cy="52" r="3" fill="${hasArmor ? '#B4B2A9' : '#9FE1CB'}"/>
+      <circle cx="55" cy="46" r="4" fill="${hasArmor ? '#B4B2A9' : '#9FE1CB'}"/>
       ${clockHand}
       <path d="M44 56 Q50 59 56 56" stroke="#085041" stroke-width="1.5" fill="none" stroke-linecap="round"/>
       <text x="50" y="90" text-anchor="middle" font-size="10" fill="#0F6E56" font-weight="500">${genes.length}/2 new genes</text>

@@ -1,7 +1,8 @@
-// ── Level 3: FarmBot Fields — The drought ────────────────────────────────────
+// ── Level 4: FarmBot Fields — The drought ────────────────────────────────────
+// (File name is historical; the engine loads levels by their `id`, not filename.)
 
 export default {
-  id: 3,
+  id: 4,
   world: 'farm',
   title: 'The drought',
   organismLabel: 'Your wheat plant',

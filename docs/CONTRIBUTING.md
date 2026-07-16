@@ -29,8 +29,8 @@ export default {
   slots: 3,                       // How many gene slots (2–5)
   genes: ['detect', 'eat', ...],  // Gene IDs from src/data/outcomes.js GENES
   growLabel: 'Grow!',             // Button label (e.g. 'Deploy!', 'Plant it!')
-  zoeIntro: '...',                // Intro hint text
-  zoeWin:   '...',                // Win message from Dr. Zoe
+  zoeIntro: '...',                // Intro hint text (shown by Assistant Jon)
+  zoeWin:   '...',                // Win message
   zoeFail:  '...',                // Fail message
   zoeWarn:  '...',                // "Almost" message
 
@@ -94,6 +94,10 @@ export default {
 };
 ```
 
+> **Note:** the `zoe*` field names (`zoeIntro`, `zoeWin`, `zoeFail`, `zoeWarn`)
+> are historical — the in-game advisor is now **Assistant Jon**. Keep the field
+> names as-is; only the displayed character changed.
+
 ### 2. Register the level
 
 In `src/data/outcomes.js`, add an entry to the `levels` array:
@@ -110,16 +114,32 @@ In `src/data/outcomes.js`, add an entry to the `levels` array:
 },
 ```
 
-### 3. Handle the dynamic import
+### 3. Register it with the engine
 
-The engine imports levels as `./levels/level${id}.js`. For levels 4–12 which share a single file, you need to re-export from the shared file. If you're creating a standalone file (recommended for complex levels), just name it `levelN.js` and you're done.
+The engine loads levels from a registry keyed by each config's `id` — see `LEVELS`
+in `src/engine.js`. Filenames and export names do **not** have to match the id
+(that's why `level3.js` currently holds level id 4, and Deep sea cleanup with id 3
+lives in `levels4-12.js`). What matters is that the `id` inside the config is
+unique and matches the manifest entry from step 2.
 
-For levels sharing `levels4-12.js`, add a re-export at the bottom:
+Wire your config in one of two ways:
 
-```js
-export { myNewLevel as default } from './levels4-12.js';
-// or create src/levels/level13.js directly
-```
+- **Bundled in `levels4-12.js`** (simplest): add `export const myLevel = { id: N, ... }`.
+  `engine.js` spreads every export from that file into the registry, so there's
+  nothing else to do.
+- **Standalone file** (`src/levels/levelN.js`, `export default { ... }`): add an
+  `import` for it near the top of `engine.js` and include it in the array that
+  builds `LEVELS`:
+
+  ```js
+  // src/engine.js
+  import myLevel from './levels/level13.js';
+  // ...
+  [level1, level2, theDrought, myLevel, ...Object.values(bundled)].forEach(...)
+  ```
+
+Because ordering follows `id`, give your level the next id in the world you want
+it to appear in, and bump any later levels if you're inserting in the middle.
 
 ### 4. Test it
 
@@ -153,9 +173,9 @@ BioBuilder Academy teaches through failure, not instruction. When designing outc
 
 1. **The wrong-but-obvious combo should fail in an interesting way.** If students will naturally reach for "multiply fast", make sure that outcome teaches them _why_ it's wrong, not just that it is.
 
-2. **Multiple winning paths are better than one.** Real biology has redundancy. Levels 1 and 3 both have 4+ winning combinations.
+2. **Multiple winning paths are better than one.** Real biology has redundancy. The drought (level 4) has four winning combinations and The virus (level 7) has two.
 
-3. **Name the real concept on the win screen.** Dr. Zoe's win message should introduce the scientific term for what the student just invented. Examples: "apoptosis", "CAM photosynthesis", "CAR-T cell therapy", "gene circuits".
+3. **Name the real concept on the win screen.** Assistant Jon's win message (`zoeWin`) should introduce the scientific term for what the student just invented. Examples: "apoptosis", "CAM photosynthesis", "CAR-T cell therapy", "gene circuits".
 
 4. **Unintended consequences are the lesson.** At least one fail/warn path should show the organism doing something unexpected — eating the wrong thing, spreading too far, attacking healthy tissue. This is the core synthetic biology ethics lesson.
 
