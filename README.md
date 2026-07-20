@@ -8,10 +8,8 @@ Students drag-and-drop gene parts onto organisms, run simulations, and see the c
 
 Open `index.html` in any modern browser — no build step, no dependencies, no server required.
 
-```bash
-git clone https://github.com/your-org/biobuilder-academy
-cd biobuilder-academy
-open index.html
+```
+https://nafrezzia.github.io/UVU_iGEM/
 ```
 
 Or serve it locally:
